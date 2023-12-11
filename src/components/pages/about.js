@@ -5,8 +5,8 @@ export default function About() {
     <div>
       <h1>About Me</h1>
       <img
-        src={require(`../../assets/self.jpg`)}
-        alt="self"
+        src={require(`../../assets/Mom-Website.jpg`)}
+        alt="mom"
         style={{ maxWidth: "450px", height: "500px" }}
       ></img>
       <p>
