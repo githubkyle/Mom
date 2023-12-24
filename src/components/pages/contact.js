@@ -18,18 +18,13 @@ const ContactForm = () => {
     setMessageValue(e.target.value);
   };
 
-  // const onSubmit = e => {
-  //   e.preventDefault();
-  //   setFormStatus("Submitting...");
-  // };
-
   return (
     <div>
       <h2>Contact me here</h2>
 
       <form
         // onSubmit={onSubmit}
-        action="https://formsubmit.co/kshwiss@gmail.com"
+        action="https://formsubmit.co/pfeeney1208@gmail.com"
         method="POST"
       >
         <input
@@ -57,45 +52,7 @@ const ContactForm = () => {
           placeholder="Your Message here "
           required
         />
-        {/* <div className="mb-3">
-          <label className="form-label" htmlFor="name">
-            Name
-          </label>
-          <input
-           
-            className="form-control"
-            value={nameValue}
-            type="text"
-            id="name"
-            required
-            name="name"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="email">
-            Email
-          </label>
-          <input
-            
-            className="form-control"
-            type="email"
-            id="email"
-            required
-            name="email"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="message">
-            Message
-          </label>
-          <textarea
-            
-            className="form-control"
-            id="message"
-            required
-            name="text"
-          />
-        </div> */}
+
         <button className="btn btn-danger" type="submit">
           {/* {formStatus} */}Send
         </button>
