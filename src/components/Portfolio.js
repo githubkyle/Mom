@@ -1,43 +1,44 @@
 import React from "react";
+
 import Project from "./pages/project";
 
 const projects = [
   {
-    title: "Writing 1",
-    imageUrl: "Workouts.png",
-    GithubRepo: "https://github.com/githubkyle/Workouts",
+    id: 1,
+    title: "Writing",
+    imageUrl: "Paper.jpg",
     DeployedPage: "https://workouts-9a2660eff0a7.herokuapp.com/"
   },
   {
-    title: "Story 2",
-    imageUrl: "servernotes.png",
-    GithubRepo: "https://github.com/githubkyle/ServerNotes",
+    id: 2,
+    title: "Story",
+    imageUrl: "Paper.jpg",
     DeployedPage: "https://githubkyle.github.io/ServerNotes/"
   },
   {
-    title: "Novel 3",
-    imageUrl: "weather.png",
-    GithubRepo: "https://github.com/githubkyle/Weather-Dashboard",
+    id: 3,
+    title: "Novel",
+    imageUrl: "Paper.jpg",
     DeployedPage: "https://githubkyle.github.io/Weather-Dashboard/"
   },
   {
-    title: "JavaScript Quiz",
-    imageUrl: "jsq.png",
-    GithubRepo: "https://github.com/githubkyle/Javascript-Quiz",
+    id: 4,
+    title: "Manuscript",
+    imageUrl: "Paper.jpg",
     DeployedPage: "https://githubkyle.github.io/Javascript-Quiz/"
   },
 
   {
-    title: "Daily Planner",
-    imageUrl: "planner.png",
-    GithubRepo: "https://github.com/githubkyle/Planner",
+    id: 5,
+    title: "Poem",
+    imageUrl: "Paper.jpg",
     DeployedPage: "https://githubkyle.github.io/Planner/"
   },
 
   {
-    title: "Password Generator",
-    imageUrl: "password.png",
-    GithubRepo: "https://github.com/githubkyle/Password-Generator",
+    id: 6,
+    title: "Autobiography",
+    imageUrl: "Paper.jpg",
     DeployedPage: "https://githubkyle.github.io/Password-Generator/"
   }
 ];
@@ -47,6 +48,7 @@ const Portfolio = () => {
     <div className="app">
       {projects.map((project, index) => (
         <Project
+          projectId={project.id}
           key={index}
           title={project.title}
           imageUrl={project.imageUrl}

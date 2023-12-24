@@ -1,29 +1,80 @@
 import React, { useState, useEffect } from "react";
-import Comment from "./server/models/Comment";
 
 // const Project = ({ title, imageUrl, GithubRepo, DeployedPage }) => {
-const Project = ({ title, imageUrl, GithubRepo, DeployedPage }) => {
+const Project = ({
+  title,
+  imageUrl,
+  GithubRepo,
+  DeployedPage,
+  projectId,
+  projectComments
+}) => {
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-  const [userName, setUserName] = useState("");
+  const [loadingComment, setLoadingComment] = useState(false);
+  const [commentData, setCommentData] = useState({
+    author: "",
+    comment: ""
+  });
 
-  const handleAddComment = () => {
-    // Create a new comment object and add it to the comments array
-    const newCommentObject = { name: userName, text: newComment };
-    setComments([...comments, newCommentObject]);
+  const onHandInputChange = event => {
+    setCommentData(prev => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value
+      };
+    });
+  };
 
-    // Clear the input fields after adding the comment
-    setNewComment("");
-    setUserName("");
+  const handleAddComment = async event => {
+    event.preventDefault();
+    try {
+      setLoadingComment(true);
+      await fetch("http://localhost:3001/api/comment", {
+        method: "post",
+        body: JSON.stringify({
+          ...commentData,
+          projectId
+        }),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+
+      setLoadingComment(false);
+      event.target.reset();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getComments = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/comment?projectId=${projectId}`,
+        {
+          method: "get",
+          headers: {
+            "content-type": "application/json"
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      setComments(data?.data);
+    } catch (error) {
+      setLoadingComment(false);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    // Fetch comments when the component mounts
-    fetch(`http://localhost:5000/api/comments/${title}`)
-      .then(response => response.json())
-      .then(data => setComments(data))
-      .catch(error => console.error(error));
-  }, [title]);
+    getComments();
+  }, []);
+
+  useEffect(() => {
+    getComments();
+  }, [loadingComment]);
 
   return (
     <div className="project">
@@ -33,45 +84,56 @@ const Project = ({ title, imageUrl, GithubRepo, DeployedPage }) => {
         alt={title}
         style={{ maxWidth: "450px", height: "500px" }}
       />
-      <a href={GithubRepo}>
-        <h3>GitHub Repo</h3>
-      </a>
       <a href={DeployedPage}>
-        <h3>Deployed Page</h3>
+        <h3>Read Here</h3>
       </a>
-      <div>
-        <label htmlFor="userName">Your Name:</label>
-        <input
-          type="text"
-          id="userName"
-          value={userName}
-          onChange={e => setUserName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="newComment">Your Comment:</label>
-        <textarea
-          id="newComment"
-          value={newComment}
-          onChange={e => setNewComment(e.target.value)}
-        />
-      </div>
-      <button onClick={handleAddComment}>Add Comment</button>
-
       {comments.length > 0 && (
-        <div>
+        <div style={{ textAlign: "center" }}>
           <h3>Comments:</h3>
           <ul>
-            {comments.map(comment => (
-              <Comment
-                key={comment._id}
-                name={comment.name}
-                text={comment.text}
-              />
-            ))}
+            {comments.map((comment, index) => {
+              return (
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: "10px"
+                  }}
+                >
+                  <div style={{ marginRight: "10px" }}>
+                    <h2>{comment?.author}:</h2>
+                  </div>
+                  <div>
+                    <h2>{comment?.content}</h2>
+                  </div>
+                </div>
+              );
+            })}
           </ul>
         </div>
       )}
+      <form onSubmit={handleAddComment}>
+        <div>
+          <label htmlFor="userName">Your Name:</label>
+          <input
+            onChange={onHandInputChange}
+            name="author"
+            type="text"
+            id="userName"
+          />
+        </div>
+        <div>
+          <label htmlFor="newComment">Comment:</label>
+          <textarea
+            onChange={onHandInputChange}
+            name="comment"
+            id="newComment"
+          />
+        </div>
+        <button type="submit">Add Comment</button>
+      </form>
     </div>
   );
 };
