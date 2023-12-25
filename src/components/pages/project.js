@@ -84,6 +84,7 @@ const Project = ({
         alt={title}
         style={{ maxWidth: "450px", height: "500px" }}
       />
+      <p>Description here</p>
       <a href={DeployedPage}>
         <h3>Read Here</h3>
       </a>
