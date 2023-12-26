@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-// const Project = ({ title, imageUrl, GithubRepo, DeployedPage }) => {
 const Project = ({
   title,
   imageUrl,
-  GithubRepo,
+
   DeployedPage,
   projectId,
   projectComments

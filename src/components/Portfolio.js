@@ -52,7 +52,6 @@ const Portfolio = () => {
           key={index}
           title={project.title}
           imageUrl={project.imageUrl}
-          GithubRepo={project.GithubRepo}
           DeployedPage={project.DeployedPage}
         />
       ))}
