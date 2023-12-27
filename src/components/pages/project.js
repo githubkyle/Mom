@@ -30,7 +30,7 @@ const Project = ({
     event.preventDefault();
     try {
       setLoadingComment(true);
-      await fetch(`${backend_url}/api/comment`, {
+      await fetch(`/api/comment`, {
         method: "post",
         body: JSON.stringify({
           ...commentData,
@@ -50,15 +50,12 @@ const Project = ({
 
   const getComments = async () => {
     try {
-      const response = await fetch(
-        `${backend_url}/api/comment?projectId=${projectId}`,
-        {
-          method: "get",
-          headers: {
-            "content-type": "application/json"
-          }
+      const response = await fetch(`/api/comment?projectId=${projectId}`, {
+        method: "get",
+        headers: {
+          "content-type": "application/json"
         }
-      );
+      });
 
       const data = await response.json();
 
