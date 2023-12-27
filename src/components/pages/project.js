@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+// import dotenv from "dotenv";
+// dotenv.config();
+// const backend_url = process.env.BACKEND_URL || "http://localhost:3001";
+const backend_url = "http://localhost:3001";
 const Project = ({
   title,
   imageUrl,
@@ -27,7 +30,7 @@ const Project = ({
     event.preventDefault();
     try {
       setLoadingComment(true);
-      await fetch("http://localhost:3001/api/comment", {
+      await fetch(`${backend_url}/api/comment`, {
         method: "post",
         body: JSON.stringify({
           ...commentData,
@@ -48,7 +51,7 @@ const Project = ({
   const getComments = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/comment?projectId=${projectId}`,
+        `${backend_url}/api/comment?projectId=${projectId}`,
         {
           method: "get",
           headers: {
