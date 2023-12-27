@@ -7,23 +7,23 @@
 
 // module.exports = mongoose.connection;
 
-import express from 'express';
-import commentRouter from './routes/commentRoutes.js';
-import connectDB from './config/connection.js';
-import cors from 'cors';
+import express from "express";
+import commentRouter from "./routes/commentRoutes.js";
+import connectDB from "./config/connection.js";
+import cors from "cors";
 
 const app = express();
 const PORT = 3001;
 
 app.use(
   cors({
-    origin: '*',
+    origin: "*"
   })
 );
 app.use(express.json());
-app.use('/api', commentRouter);
-app.get('/', (req, res) => {
-  res.send('SERVER IS UP');
+app.use("/api", commentRouter);
+app.get("/", (req, res) => {
+  res.send("SERVER IS UP");
 });
 
 app.listen(PORT, () => {

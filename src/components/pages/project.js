@@ -5,8 +5,7 @@ const Project = ({
   imageUrl,
 
   DeployedPage,
-  projectId,
-  projectComments
+  projectId
 }) => {
   const [comments, setComments] = useState([]);
   const [loadingComment, setLoadingComment] = useState(false);

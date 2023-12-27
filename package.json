@@ -1,6 +1,6 @@
 {
   "homepage": "https://githubkyle.github.io/mom/",
-  "name": "ksportfolio",
+  "name": "mom-site-frontend",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
