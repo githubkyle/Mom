@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import dotenv from "dotenv";
 // dotenv.config();
 // const backend_url = process.env.BACKEND_URL || "http://localhost:3001";
-const backend_url = "http://localhost:3001";
+const backend_url = "https://backend-mom-website-90f4c1ae5259.herokuapp.com";
 const Project = ({
   title,
   imageUrl,
@@ -30,7 +30,7 @@ const Project = ({
     event.preventDefault();
     try {
       setLoadingComment(true);
-      await fetch(`/api/comment`, {
+      await fetch(`${backend_url}/api/comment`, {
         method: "post",
         body: JSON.stringify({
           ...commentData,
@@ -50,12 +50,15 @@ const Project = ({
 
   const getComments = async () => {
     try {
-      const response = await fetch(`/api/comment?projectId=${projectId}`, {
-        method: "get",
-        headers: {
-          "content-type": "application/json"
+      const response = await fetch(
+        `${backend_url}/api/comment?projectId=${projectId}`,
+        {
+          method: "get",
+          headers: {
+            "content-type": "application/json"
+          }
         }
-      });
+      );
 
       const data = await response.json();
 
